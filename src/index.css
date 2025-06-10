@@ -1,20 +1,35 @@
 /* src/index.css */
 
+/* Modernização: Cores e Sombras */
 :root {
-  --bg-light: #f9f9fb;
-  --bg-dark: #121212;
+  --bg-light: #f4f7f6; /* Fundo mais suave */
+  --bg-dark: #0a0a0a; /* Escuro profundo */
   --card-light: #ffffff;
-  --card-dark: #1e1e1e;
-  --text-light: #222222;
-  --text-dark: #f0f0f0;
-  --btn-bg: #4f46e5;
-  --btn-bg-hover: #3730a3;
+  --card-dark: #1c1c1c; /* Card um pouco mais claro no tema escuro */
+  --text-light: #2c3e50; /* Texto mais escuro e profissional */
+  --text-dark: #e0e0e0; /* Texto mais claro */
+  --btn-bg: #3498db; /* Azul vibrante */
+  --btn-bg-hover: #2980b9;
   --btn-text: #ffffff;
-  --input-border: #d1d5db;
-  --input-border-focus: #4f46e5;
-  --shadow-light: rgba(100, 100, 255, 0.15);
-  --shadow-dark: rgba(0, 0, 0, 0.7);
+  --input-border: #bdc3c7; /* Cinza claro para bordas */
+  --input-border-focus: #3498db;
+  --shadow-light: rgba(44, 62, 80, 0.1); /* Sombra suave para light */
+  --shadow-dark: rgba(0, 0, 0, 0.4); /* Sombra mais densa para dark */
   --transition-speed: 0.3s;
+
+  /* Sidebar e Header */
+  --sidebar-bg-light: #ffffff;
+  --sidebar-bg-dark: #1a1a1a;
+  --sidebar-text-light: #5c6f7c;
+  --sidebar-text-dark: #cccccc;
+  --sidebar-hover-light: #e8f0fe; /* Azul claro para hover light */
+  --sidebar-hover-dark: #2a2a2a;
+  --sidebar-active-light: #d6eaff; /* Azul ainda mais claro para active light */
+  --sidebar-active-dark: #3a3a3a;
+
+  /* Cores de feedback */
+  --success-color: #28a745;
+  --error-color: #dc3545;
 }
 
 html[data-theme="light"] {
@@ -27,14 +42,28 @@ html[data-theme="dark"] {
   color: var(--text-dark);
 }
 
-body, html, #root {
+body,
+html,
+#root {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna */
   transition: background-color var(--transition-speed), color var(--transition-speed);
+  line-height: 1.6; /* Melhorar legibilidade */
 }
 
+/* Base styles for the main content area to accommodate the sidebar */
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: none;
+  padding: 0;
+  text-align: left;
+}
+
+/* Login/Register Card Styles */
 .container {
   height: 100%;
   display: flex;
@@ -43,41 +72,48 @@ body, html, #root {
   padding: 20px;
 }
 
-.card {
+.auth-card {
   background-color: var(--card-light);
   color: var(--text-light);
-  max-width: 400px;
+  max-width: 420px; /* Um pouco maior */
   width: 100%;
-  padding: 40px 35px 35px 35px;
-  border-radius: 16px;
-  box-shadow: 0 12px 25px var(--shadow-light);
+  padding: 40px 45px 35px 45px; /* Mais padding lateral */
+  border-radius: 20px; /* Bordas mais arredondadas */
+  box-shadow: 0 15px 30px var(--shadow-light); /* Sombra mais pronunciada */
   transition: background-color var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-html[data-theme="dark"] .card {
+html[data-theme="dark"] .auth-card {
   background-color: var(--card-dark);
   color: var(--text-dark);
-  box-shadow: 0 12px 30px var(--shadow-dark);
+  box-shadow: 0 15px 35px var(--shadow-dark);
 }
 
+/* Common Header for Login/Register */
 h2 {
   margin-top: 0;
   margin-bottom: 30px;
   font-weight: 700;
-  font-size: 2.25rem;
+  font-size: 2.5rem; /* Título maior */
   text-align: center;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.5px;
   user-select: none;
+  color: var(--btn-bg); /* Título em azul */
 }
 
+/* Input Styles */
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea { /* Added textarea for descriptions */
   width: 100%;
-  padding: 14px 18px;
+  padding: 16px 20px; /* Mais padding */
   margin-bottom: 20px;
   border: 1.8px solid var(--input-border);
-  border-radius: 10px;
-  font-size: 1.05rem;
+  border-radius: 12px; /* Bordas mais arredondadas */
+  font-size: 1.1rem; /* Fonte maior */
   box-sizing: border-box;
   transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
   background-color: transparent;
@@ -86,83 +122,118 @@ input[type="password"] {
 }
 
 input[type="email"]::placeholder,
-input[type="password"]::placeholder {
+input[type="password"]::placeholder,
+input[type="text"]::placeholder,
+textarea::placeholder {
   color: #999;
+  opacity: 0.8;
 }
 
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus {
   border-color: var(--input-border-focus);
-  box-shadow: 0 0 8px var(--btn-bg);
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.4); /* Sombra azul vibrante */
   outline: none;
   background-color: transparent;
   color: inherit;
 }
 
+/* Button Styles */
 button {
   width: 100%;
-  padding: 14px 18px;
+  padding: 16px 20px;
   background-color: var(--btn-bg);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px; /* Mais arredondado */
   color: var(--btn-text);
-  font-weight: 700;
-  font-size: 1.15rem;
+  font-weight: 600; /* Um pouco menos bold */
+  font-size: 1.2rem; /* Fonte maior */
   cursor: pointer;
-  transition: background-color var(--transition-speed), transform 0.2s ease;
+  transition: background-color var(--transition-speed), transform 0.2s ease, box-shadow 0.2s ease;
   user-select: none;
+  letter-spacing: 0.5px;
 }
 
 button:hover {
   background-color: var(--btn-bg-hover);
-  transform: translateY(-2px);
+  transform: translateY(-3px); /* Efeito de elevação */
+  box-shadow: 0 8px 15px rgba(52, 152, 219, 0.4); /* Sombra ao hover */
 }
 
 .btn-link {
   background: none;
   border: none;
   color: var(--btn-bg);
-  text-decoration: underline;
+  text-decoration: none; /* Remove underline by default */
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 1rem; /* Fonte um pouco maior */
   padding: 0;
-  transition: color var(--transition-speed);
+  transition: color var(--transition-speed), text-decoration 0.2s ease;
   user-select: none;
+  font-weight: 500;
 }
 
 .btn-link:hover {
-  color: grey;
+  color: var(--btn-bg-hover);
+  text-decoration: underline; /* Underline on hover */
 }
 
 .footer-links {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 20px; /* Mais espaço */
 }
+
+/* Feedback messages */
+.feedback-message {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.feedback-message.success {
+  background-color: #d4edda; /* Light green */
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+
+.feedback-message.error {
+  background-color: #f8d7da; /* Light red */
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+}
+
 
 .toggle-theme-btn {
   position: fixed;
   top: 16px;
-  left: 16px;
+  right: 16px;
   background-color: var(--btn-bg);
   color: var(--btn-text);
   border: none;
-  padding: 8px 10px;
+  padding: 10px 12px; /* Aumentado ligeiramente */
   border-radius: 12px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.9rem; /* Levemente maior */
   font-weight: 600;
-  box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
   transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.2s ease;
   user-select: none;
-  z-index: 1000;
-  width: 85px;
+  z-index: 1000; /* Abaixo do botão de menu */
+  width: 90px;
   text-align: center;
 }
 
 .toggle-theme-btn:hover {
   background-color: var(--btn-bg-hover);
-  box-shadow: 0 8px 25px rgba(55, 48, 163, 0.7);
+  box-shadow: 0 8px 25px rgba(41, 128, 185, 0.7);
   transform: scale(1.05);
 }
 
@@ -171,4 +242,646 @@ button:hover {
   margin-bottom: 25px;
   font-size: 1.05rem;
   user-select: none;
+}
+
+/* NEW: Layout for authenticated user */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* NEW: Sidebar Styles */
+.sidebar {
+  width: 260px; /* Um pouco mais largo */
+  background-color: var(--sidebar-bg-light);
+  color: var(--sidebar-text-light);
+  padding: 25px 20px; /* Mais padding vertical */
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15); /* Sombra mais definida */
+  transition: width var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999; /* Abaixo do botão de menu e do header fixo */
+  transform: translateX(-100%); /* Hidden by default */
+  overflow-y: auto; /* Para scroll se o conteúdo for grande */
+}
+
+html[data-theme="dark"] .sidebar {
+  background-color: var(--sidebar-bg-dark);
+  color: var(--sidebar-text-dark);
+  box-shadow: 3px 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Show when open */
+}
+
+.sidebar h3 {
+  color: var(--btn-bg);
+  text-align: center;
+  margin-bottom: 40px; /* Mais espaço abaixo do título */
+  font-size: 2rem; /* Título maior */
+  letter-spacing: 0.8px;
+  user-select: none;
+  font-weight: 700;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 12px; /* Mais espaço entre os itens */
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px; /* Mais padding */
+  color: var(--sidebar-text-light);
+  text-decoration: none;
+  border-radius: 10px; /* Bordas mais arredondadas */
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  font-size: 1.1rem; /* Fonte maior */
+  font-weight: 500;
+  user-select: none;
+}
+
+html[data-theme="dark"] .sidebar nav ul li a {
+  color: var(--sidebar-text-dark);
+}
+
+.sidebar nav ul li a:hover {
+  background-color: var(--sidebar-hover-light);
+}
+
+html[data-theme="dark"] .sidebar nav ul li a:hover {
+  background-color: var(--sidebar-hover-dark);
+}
+
+.sidebar nav ul li a.active {
+  background-color: var(--sidebar-active-light);
+  color: var(--btn-bg);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2); /* Sombra para o item ativo */
+}
+
+html[data-theme="dark"] .sidebar nav ul li a.active {
+  background-color: var(--sidebar-active-dark);
+  color: var(--btn-bg);
+}
+
+.sidebar nav ul li a svg {
+  margin-right: 12px; /* Mais espaço para o ícone */
+  font-size: 1.3em; /* Ícone um pouco maior */
+}
+
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  width: 44px; /* Um pouco maior */
+  height: 44px; /* Um pouco maior */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.6rem; /* Ícone maior */
+  box-shadow: 0 6px 18px rgba(52, 152, 219, 0.5); /* Sombra mais suave e azulada */
+  transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.2s ease;
+  user-select: none;
+  z-index: 1001; /* Acima de tudo */
+}
+
+.sidebar-toggle-btn:hover {
+  background-color: var(--btn-bg-hover);
+  box-shadow: 0 10px 25px rgba(41, 128, 185, 0.7);
+  transform: scale(1.1); /* Mais zoom */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  padding-top: 80px; /* Mais espaço para o cabeçalho fixo */
+  margin-left: 0;
+  transition: margin-left var(--transition-speed);
+}
+
+.header {
+  background-color: var(--card-light);
+  color: var(--text-light);
+  padding: 15px 25px; /* Mais padding */
+  box-shadow: 0 3px 8px var(--shadow-light); /* Sombra mais pronunciada */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  transition: background-color var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+html[data-theme="dark"] .header {
+  background-color: var(--card-dark);
+  color: var(--text-dark);
+  box-shadow: 0 4px 10px var(--shadow-dark);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  margin-left: 65px; /* Mais espaço para o botão de toggle */
+}
+
+.header-logo {
+  height: 40px;
+  margin-right: 15px;
+}
+
+.header-title {
+  font-size: 2rem; /* Título maior no header */
+  font-weight: 700;
+  color: var(--btn-bg);
+  user-select: none;
+  letter-spacing: 0.5px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  background-color: #e74c3c; /* Vermelho mais suave */
+  padding: 12px 18px; /* Mais padding */
+  border-radius: 10px; /* Mais arredondado */
+  font-size: 1rem; /* Levemente maior */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  user-select: none;
+  width: auto;
+  box-shadow: none; /* Remove shadow on logout button */
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px); /* Efeito de elevação */
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4); /* Sombra ao hover */
+}
+
+/* Page Content Styling */
+.page-content {
+  padding: 30px; /* Mais padding */
+  max-width: 1000px; /* Largura maior */
+  margin: 30px auto; /* Mais margin */
+  background-color: var(--card-light);
+  border-radius: 20px; /* Mais arredondado */
+  box-shadow: 0 8px 25px var(--shadow-light); /* Sombra mais pronunciada */
+  transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+  text-align: center; /* Centraliza conteúdo padrão */
+}
+
+html[data-theme="dark"] .page-content {
+  background-color: var(--card-dark);
+  box-shadow: 0 10px 30px var(--shadow-dark);
+}
+
+.page-content h1 {
+  color: var(--btn-bg);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 3rem; /* Título principal maior */
+  user-select: none;
+  font-weight: 700;
+}
+
+.page-content p {
+  line-height: 1.8; /* Melhorar espaçamento de linha */
+  margin-bottom: 20px; /* Mais espaço entre parágrafos */
+  font-size: 1.1rem; /* Texto maior */
+  color: var(--text-light);
+}
+html[data-theme="dark"] .page-content p {
+  color: var(--text-dark);
+}
+
+/* HomePage Specific Styles (New Sections) */
+.home-intro,
+.home-section {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+
+.home-intro h2,
+.home-section h2 {
+  font-size: 2.5rem;
+  color: var(--btn-bg);
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.home-intro p,
+.home-section p {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  font-size: 1.2rem;
+}
+
+.home-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.feature-card {
+  background-color: var(--bg-light); /* Background mais claro */
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 6px 20px var(--shadow-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color var(--transition-speed);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+html[data-theme="dark"] .feature-card {
+  background-color: var(--bg-dark);
+  box-shadow: 0 8px 25px var(--shadow-dark);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px); /* Elevação maior */
+  box-shadow: 0 12px 30px rgba(52, 152, 219, 0.3);
+}
+
+.feature-card .icon {
+  font-size: 3.5rem;
+  color: var(--btn-bg);
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  font-size: 1.8rem;
+  color: var(--text-light);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .feature-card h3 {
+  color: var(--text-dark);
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 0;
+  flex-grow: 1; /* Permite que o texto ocupe o espaço */
+}
+
+html[data-theme="dark"] .feature-card p {
+  color: var(--text-dark);
+}
+
+/* Event List Styles */
+.event-list {
+  margin-top: 30px;
+  text-align: left; /* Alinha o texto da lista à esquerda */
+}
+
+.event-list h3 {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 25px;
+  font-size: 2rem;
+  user-select: none;
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .event-list h3 {
+  color: var(--text-dark);
+}
+
+.event-item {
+  background-color: var(--bg-light);
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  padding: 20px; /* Mais padding */
+  margin-bottom: 18px; /* Mais espaço */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra mais forte */
+  transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+html[data-theme="dark"] .event-item {
+  background-color: var(--bg-dark);
+  border-color: var(--card-dark);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.event-item h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--btn-bg);
+  font-size: 1.6rem; /* Título maior */
+  user-select: none;
+  font-weight: 600;
+}
+
+.event-item p {
+  margin: 6px 0;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+html[data-theme="dark"] .event-item p {
+  color: var(--text-dark);
+}
+
+.event-item .actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px; /* Mais espaço */
+  justify-content: flex-end; /* Alinha botões à direita */
+}
+
+.event-item .actions button {
+  width: auto;
+  padding: 10px 16px; /* Mais padding */
+  font-size: 0.95rem; /* Levemente maior */
+  border-radius: 10px; /* Mais arredondado */
+  box-shadow: none; /* Remove shadow from individual buttons */
+}
+
+.event-item .actions button:hover {
+  transform: translateY(-1px); /* Efeito menor */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-item .actions .delete-btn {
+  background-color: #e74c3c;
+}
+
+.event-item .actions .delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.event-item .actions .edit-btn {
+  background-color: #f39c12; /* Laranja mais suave */
+  color: var(--btn-text); /* Texto branco para melhor contraste */
+}
+
+.event-item .actions .edit-btn:hover {
+  background-color: #e67e22;
+}
+
+/* Certificates Page Styles */
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards maiores */
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.certificate-card {
+  background-color: var(--card-light);
+  border-radius: 16px; /* Mais arredondado */
+  box-shadow: 0 6px 20px var(--shadow-light);
+  padding: 25px; /* Mais padding */
+  text-align: center;
+  transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.2s ease;
+}
+
+html[data-theme="dark"] .certificate-card {
+  background-color: var(--card-dark);
+  box-shadow: 0 8px 25px var(--shadow-dark);
+}
+
+.certificate-card:hover {
+  transform: translateY(-5px); /* Elevação sutil */
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+}
+
+.certificate-card h4 {
+  color: var(--btn-bg);
+  font-size: 1.5rem; /* Título maior */
+  margin-bottom: 12px;
+  user-select: none;
+  font-weight: 600;
+}
+
+.certificate-card p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: var(--text-light);
+}
+
+html[data-theme="dark"] .certificate-card p {
+  color: var(--text-dark);
+}
+
+.certificate-card .btn-view {
+  background-color: #27ae60; /* Verde mais escuro */
+  width: auto;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.certificate-card .btn-view:hover {
+  background-color: #229a58;
+}
+
+/* Status Page Styles */
+.status-info {
+  text-align: center;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.status-item {
+  background-color: var(--card-light);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px var(--shadow-light);
+  padding: 30px; /* Mais padding */
+  transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+html[data-theme="dark"] .status-item {
+  background-color: var(--card-dark);
+  box-shadow: 0 8px 25px var(--shadow-dark);
+}
+
+.status-item h4 {
+  color: var(--btn-bg);
+  font-size: 1.8rem; /* Título maior */
+  margin-bottom: 15px;
+  user-select: none;
+  font-weight: 600;
+}
+
+.status-item p {
+  font-size: 1.2rem; /* Texto maior */
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+html[data-theme="dark"] .status-item p {
+  color: var(--text-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px; /* Smaller sidebar on mobile */
+  }
+
+  .main-content {
+    padding-top: 80px; /* Keep space for header */
+  }
+
+  .sidebar-toggle-btn {
+    font-size: 1.4rem; /* Adjust icon size */
+    width: 40px; /* Smaller button */
+    height: 40px; /* Smaller button */
+    padding: 7px; /* Adjust padding */
+  }
+
+  .toggle-theme-btn {
+    width: 80px;
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+
+  .header-title {
+    font-size: 1.8rem;
+  }
+
+  .header-left {
+    margin-left: 60px; /* Adjust space for smaller toggle button */
+  }
+
+  .page-content {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+  .auth-card {
+    padding: 35px 30px;
+  }
+
+  .home-intro h2, .home-section h2 {
+    font-size: 2rem;
+  }
+  .home-intro p, .home-section p {
+    font-size: 1.1rem;
+  }
+  .feature-card h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    transform: translateX(-100%);
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    padding-top: 70px; /* Space for toggle button and small header */
+  }
+  .sidebar.open {
+    transform: translateX(0%);
+  }
+
+  .main-content {
+    margin-left: 0 !important; /* Always 0 margin on small screens */
+    padding: 15px;
+    padding-top: 70px; /* Space for the header */
+  }
+  .toggle-theme-btn {
+    top: 10px;
+    right: 10px;
+    width: 65px;
+    padding: 6px 8px;
+    font-size: 0.7rem;
+  }
+  .sidebar-toggle-btn {
+    top: 10px;
+    left: 10px;
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+    padding: 6px;
+  }
+  .header {
+    padding: 12px 18px;
+  }
+  .header-title {
+    font-size: 1.6rem;
+  }
+  .header-left {
+    margin-left: 55px; /* Adjust for very small screens */
+  }
+  .logout-btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+  .auth-card {
+    padding: 30px 25px;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+  input[type="email"], input[type="password"], input[type="text"], input[type="date"], input[type="time"], button, textarea {
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+  .page-content {
+    padding: 15px;
+    margin: 15px auto;
+  }
+  .page-content h1 {
+    font-size: 2.2rem;
+  }
+  .home-intro h2, .home-section h2 {
+    font-size: 1.8rem;
+  }
+  .home-intro p, .home-section p {
+    font-size: 1rem;
+  }
+  .feature-card {
+    padding: 25px;
+  }
+  .feature-card .icon {
+    font-size: 3rem;
+  }
+  .feature-card h3 {
+    font-size: 1.4rem;
+  }
 }
